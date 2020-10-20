@@ -1,27 +1,33 @@
-PROCEDURE dot_product(ps : INTEGER, VAR v1 : ARRAY_OF INTEGER VAR v2 : ARRAY_OF INTEGER)
+PROCEDURE dot_product(VAR ps : INTEGER v1 : ARRAY_OF INTEGER  v2 : ARRAY_OF INTEGER)
 VAR
     i,j : INTEGER;
 BEGIN
-    FOR i FROM 0 TO ps  DO
-    FOR j FROM 0 TO ps  DO
-        Read (v1[i] + v2[j]);
+    FOR i FROM 0 TO v1.length-1  DO
+        FOR j FROM 0 TO v2.length-1  DO
+        ps := v1[i] * v2[j];
+        END_FOR
     END_FOR
-    END_FOR
+END
+
+FUNCTION orthOrNot(produit_scalaire: INTEGER) : STRING
+BEGIN
+    IF (produit_scalaire=0) THEN
+        RETURN "vecteurs orthogonaux"
+    else 
+        RETURN "vecteurs non orthogonaux"
+    END_IF
 END
 
 ALGORITHM vecteurs
 VAR
     v1 : ARRAY_OF INTEGER[100];
     v2 : ARRAY_OF INTEGER[100];
-    n,i,j : INTEGER;
+    ps : INTEGER;
+    msg: STRING;
     
 BEGIN
-    FOR i FROM 0 TO v1.length-1  DO
-    FOR j FROM 0 TO v2.length-1  DO
-    IF (v1[i]*v2[j]=0) THEN
-        dot_product(n,v1,v2);
     
-    else 
-    Write ("vecteurs non orthogonaux")
-    END_IF
+        dot_product(ps,v1,v2);
+        msg := orthOrNot(ps)
+        Write(msg)
 END
